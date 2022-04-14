@@ -1,74 +1,60 @@
+<?php session_start();
+    ob_start(); 
+    include_once('includes/crud.php');
+    $db = new Database;
+    include_once('includes/custom-functions.php');
+    $fn = new custom_functions();
+    $db->connect();
+    date_default_timezone_set('Asia/Kolkata');
+    $sql = "SELECT * FROM settings";
+    $db->sql($sql);
+    $res = $db->getResult();
+    $settings = json_decode($res[5]['value'],1);
+    $logo = $fn->get_settings('logo');
+    
+    ?>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html>
+  <head>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn App</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-</head>
-<?php
-include_once('./includes/crud.php');
-$db = new Database;
-$db->connect();
+	<link rel="icon" type="image/ico" href="<?= DOMAIN_URL . 'dist/img/'.$logo?>">
+	<title>Admin Login - <?=$settings['app_name']?></title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="plugins/morris/morris.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
-if (isset($_POST['btnSubmit'])) {
-    $name = $db->escapeString($_POST['name']);
-    $mobile = $db->escapeString($_POST['mobile']);
-    $referral = $db->escapeString($_POST['referral']);
-    $error = array();
-    if (empty($name)) {
-        $error['failed'] = "<span class='btn btn-danger'>Please Enter Name</span>";
-
-    }
-    if (!empty($name)) {
-        $sql = "INSERT INTO users(`name`,`mobile`,`referral`)VALUES('$name','$mobile','$referral')";
-        $db->sql($sql);
-        
-    }
-    if (empty($mobile)) {
-        $error['failed'] = "<span class='btn btn-danger'>Please Enter Mobilenumber</span>";
-
-    }
-    if (!empty($mobile)) {
-        $sql = "INSERT INTO users (`name`,`mobilenumber`,`referral`)VALUES('$name','$mobile','$referral')";
-        $db->sql($sql);
-        
-    }
-    if (empty($referral)) {
-        $error['failed'] = "<span class='btn btn-danger'>Please Enter your referral</span>";
-
-    }
-    if (!empty($referral)) {
-        $sql = "INSERT INTO users(`name`,`mobilenumber`,`referral`)VALUES('$name','$mobile','$referral')";
-        $db->sql($sql);
-    }
-    $error['failed'] = "<span class='btn btn-success'>Registered Successfully</span>";
-   
-    
-
-}
-?>
-<body>
-<form method="post" enctype="multipart/form-data">
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input  name="name" type="text" class="form-control" id=""  placeholder="name">
-    
-  </div>
-  <div class="form-group">
-        <label for="mobile">Mobile Number</label>
-            <input name="mobile" type="text" class="form-control" id=""  placeholder="Mobile Number">
-  </div>
-  <div class="form-group ">
-        <label for="referral">Referral Code</label>
-            <input name="referral" type="text" class="form-control" id=""  placeholder="Code">
-  </div>
-  <button type="submit" name="btnSubmit" class="btn btn-primary">Sign Up</button>
-
-  <p class="text-danger"><?php echo isset($error['failed']) ? $error['failed'] : ''; ?></p>
-</form>
-    
-    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
 </body>
+      <!-- Content Wrapper. Contains page content -->
+       <?php include 'public/login-form.php'; ?>
+  </body>
 </html>
