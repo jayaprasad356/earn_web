@@ -49,6 +49,7 @@ if (isset($_POST['level']) && $_POST['level'] == '2'){
         $sql = "SELECT * FROM `users` WHERE referral=$referral2";
         $db->sql($sql);
         $res2 = $db->getResult();
+        
         //$rows[] = $tempRow;
 
     }
