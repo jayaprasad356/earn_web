@@ -53,7 +53,9 @@ if (isset($_GET['table']) && $_GET['table'] == 'users') {
     foreach ($res as $row) {
         $operate = '<a href="purchasedplans.php?id=' . $row['id'] . '" title="View">View purchased plans</a>'; 
         $history= '<a href="rechargedhistories.php?id=' . $row['id'] . '" title="View">View recharge history</a>';
-        
+        $daily_income= '<a href="dailyincomes.php?id=' . $row['id'] . '" title="View">View daily incomes</a>';
+        $profile= ' <a href="edit-profile.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
+
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
         $tempRow['mobile'] = $row['mobile'];
@@ -62,6 +64,8 @@ if (isset($_GET['table']) && $_GET['table'] == 'users') {
         $tempRow['balance'] = $row['balance'];
         $tempRow['operate'] = $operate;
         $tempRow['history'] = $history;
+        $tempRow['daily_income'] = $daily_income;
+        $tempRow['profile'] = $profile;
         $rows[] = $tempRow;
         }
     $bulkData['rows'] = $rows;
@@ -104,7 +108,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'purchasedplans') {
         $tempRow['daily_income'] = $row['daily_income'];
         $tempRow['price'] = $row['price'];
         $tempRow['valid'] = $row['valid'];
-        $tempRow['operate'] = $operate;
+      
         $rows[] = $tempRow;
     }
     $bulkData['rows'] = $rows;
@@ -128,6 +132,28 @@ if (isset($_GET['table']) && $_GET['table'] == 'rechargedhistories') {
         $tempRow['status'] = $row['status'];
         $tempRow['payment_type'] = $row['payment_type'];
         $tempRow['operate'] = $operate;
+        $rows[] = $tempRow;
+    }
+    $bulkData['rows'] = $rows;
+    print_r(json_encode($bulkData));
+}
+if (isset($_GET['table']) && $_GET['table'] == 'dailyincomes') {
+    $user_id = $_GET['user_id'];
+
+    $sql = "SELECT * FROM daily_income WHERE user_id = $user_id";
+    $db->sql($sql);
+    $res = $db->getResult();
+    $rows = array();
+    $tempRow = array();
+    foreach ($res as $row) {
+
+        
+        $tempRow['id'] = $row['id'];
+        $tempRow['user_id'] = $row['user_id'];
+        $tempRow['plan_id'] = $row['plan_id'];
+        $tempRow['purchased_id'] = $row['purchased_id'];
+        $tempRow['credited_amount'] = $row['credited_amount'];
+       
         $rows[] = $tempRow;
     }
     $bulkData['rows'] = $rows;

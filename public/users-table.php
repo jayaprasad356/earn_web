@@ -29,6 +29,8 @@
                                     <th data-field="balance" data-sortable="true" >Balance</th>
                                     <th data-field="operate" data-events="actionEvents">Action</th>
                                     <th data-field="history" data-events="actionEvents">History</th>
+                                    <th data-field="daily_income" data-events="actionEvents">Daily Income</th>
+                                    <th data-field="profile" data-events="actionEvents">Edit Profile</th>
                     
                                 </tr>
                             </thead>

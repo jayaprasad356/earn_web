@@ -46,8 +46,9 @@ include "header.php";
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-aqua">
                         <div class="inner">
-                            <h3>34</h3>
-                            <p>Students</p>
+                            <h3>300</h3>
+                            <p>Welcome to Earnapp</p>
+                            
                         </div>
                         <div class="icon"><i class="fa fa-shopping-cart"></i></div>
                         <a href="orders.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
@@ -56,8 +57,8 @@ include "header.php";
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-yellow">
                         <div class="inner">
-                            <h3>34</h3>
-                            <p>Staffs</p>
+                            <h3>1000</h3>
+                            <p>Total Users</p>
                         </div>
                         <div class="icon"><i class="fa fa-cubes"></i></div>
                         <a href="products.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
@@ -66,8 +67,8 @@ include "header.php";
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-red">
                         <div class="inner">
-                            <h3>34</h3>
-                            <p>Exams</p>
+                            <h3>50000</h3>
+                            <p>Total Income</p>
                         </div>
                         <div class="icon"><i class="fa fa-users"></i></div>
                         <a href="customers.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>

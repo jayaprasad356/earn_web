@@ -181,6 +181,20 @@ $res_logo = $db->getResult();
                         <i class="fa fa-angle-right pull-right"></i>
                     </a>
                 </li>
+                <li class="treeview">
+                    <a href="refercommissions.php">
+                        <i class="fa fa-bullseye"></i>
+                        <span>Refer Commission</span>
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="settings.php">
+                        <i class="fa fa-bullseye"></i>
+                        <span>Settings</span>
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </a>
+                </li>
                 
             </ul>
             </section>

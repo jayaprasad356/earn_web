@@ -61,7 +61,7 @@ foreach ($res as $row)
                                 <div class='col-md-4'>
                                 <label for="">Select Status</label> <i class="text-danger asterik">*</i> <?php echo isset($error['status']) ? $error['status'] : ''; ?><br>
                                     <select id="status" name="status"   class="form-control">
-                                        <option value="">Select</option>
+                                        
                                         <option  value="1" <?=$data['status'] == '1' ? ' selected="selected"' : '';?> >Received</option>
                                         <option  value="0" <?=$data['status'] == '0' ? ' selected="selected"' : '';?> >Processed</option>
                                     </select>
