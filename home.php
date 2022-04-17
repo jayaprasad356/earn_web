@@ -60,8 +60,8 @@ include "header.php";
                             <h3>1000</h3>
                             <p>Total Users</p>
                         </div>
-                        <div class="icon"><i class="fa fa-cubes"></i></div>
-                        <a href="products.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <div class="icon"><i class="fa fa-users"></i></div>
+                        <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-xs-6">
@@ -70,8 +70,8 @@ include "header.php";
                             <h3>50000</h3>
                             <p>Total Income</p>
                         </div>
-                        <div class="icon"><i class="fa fa-users"></i></div>
-                        <a href="customers.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <div class="icon"><i class="fa fa-money"></i></div>
+                        <a href="home.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
