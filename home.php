@@ -46,12 +46,12 @@ include "header.php";
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-aqua">
                         <div class="inner">
-                            <h3>300</h3>
-                            <p>Welcome to Earnapp</p>
+                            <h3>8</h3>
+                            <p>Total Plans</p>
                             
                         </div>
                         <div class="icon"><i class="fa fa-shopping-cart"></i></div>
-                        <a href="orders.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="plans.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-xs-6">
@@ -71,7 +71,7 @@ include "header.php";
                             <p>Total Income</p>
                         </div>
                         <div class="icon"><i class="fa fa-money"></i></div>
-                        <a href="home.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="plans.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>

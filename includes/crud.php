@@ -5,10 +5,10 @@
  * @Package Database
  */
 
-define('DOMAIN_URL', 'http://localhost/earnapp/'); /* chnage to your domain here - don't forget to add forward slash at the end of the URL like this "/" */
+define('DOMAIN_URL', 'http://earnapp.greymatterworks.in/'); /* chnage to your domain here - don't forget to add forward slash at the end of the URL like this "/" */
 define('ALLOW_MODIFICATION', 1);
 define('JWT_SECRET_KEY', '12345678'); /* chnage to your secret key here set it to anything you like*/
-date_default_timezone_set("Asia/Calcutta");
+
 class Database
 {
     /* 
@@ -19,9 +19,9 @@ class Database
      */
 
     private $db_host = "localhost";  // Change as required
-    private $db_user = "root";  // Change as required
-    private $db_pass = "";  // Change as required
-    private $db_name = "earnapp";    // Change as required
+    private $db_user = "u743445510_earnuser";  // Change as required
+    private $db_pass = "Earnapp@2022";  // Change as required
+    private $db_name = "u743445510_earnapp";    // Change as required
 
     /*
      * Extra variables that are required by other function such as boolean con variable
