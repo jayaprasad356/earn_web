@@ -35,6 +35,9 @@ $type = $db->escapeString($_POST['type']);
 $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
 $db->sql($sql);
 $res = $db->getResult();
+$level1_referral_id = $res[0]['level1_referral_id'];
+$level2_referral_id = $res[0]['level2_referral_id'];
+$level3_referral_id = $res[0]['level3_referral_id'];
 $recharge = $res[0]['balance'];
 $recharge = $recharge + $amount;
 $num = $db->numRows($res);
@@ -46,6 +49,57 @@ if ($num == 1) {
     $sql = "UPDATE users SET `balance`= $recharge WHERE `id`=" . $user_id;
     $db->sql($sql);
     $res = $db->getResult();
+
+    if($level1_referral_id != 0){
+        $level = 1;
+        $sql = "SELECT * FROM refer_commission";
+        $db->sql($sql);
+        $res = $db->getResult();
+        $level_percentage = $res[0]['level_1'];
+    
+        $bonus_amount = ($level_percentage / 100) * $amount ;
+    
+        $sql = "INSERT INTO referral_bonus (`user_id`,`referral_user_id`,`level`,`recharged_amount`,`level_percentage`,`bonus_amount`) VALUES ('$user_id',$level1_referral_id,$level,$amount,$level_percentage,$bonus_amount)";
+        $db->sql($sql);
+        $res = $db->getResult();
+        $sql = "SELECT * FROM users WHERE id = '" . $level1_referral_id . "'";
+        $db->sql($sql);
+        $res = $db->getResult();
+        $earn = $res[0]['earn'];
+        $earn = $earn + $bonus_amount;
+        $sql = "UPDATE users SET `earn`= '$earn' WHERE `id`= '$level1_referral_id'";
+        $db->sql($sql);
+    }
+    if($level2_referral_id != 0){
+        $level = 2;
+        $sql = "SELECT * FROM refer_commission";
+        $db->sql($sql);
+        $res = $db->getResult();
+        $level_percentage = $res[0]['level_2'];
+    
+        $bonus_amount = ($level_percentage / 100) * $amount ;
+    
+        $sql = "INSERT INTO referral_bonus (`user_id`,`referral_user_id`,`level`,`recharged_amount`,`level_percentage`,`bonus_amount`) VALUES ('$user_id',$level2_referral_id,$level,$amount,$level_percentage,$bonus_amount)";
+        $db->sql($sql);
+        $res = $db->getResult();
+    }
+    if($level3_referral_id != 0){
+        $level = 3;
+        $sql = "SELECT * FROM refer_commission";
+        $db->sql($sql);
+        $res = $db->getResult();
+        $level_percentage = $res[0]['level_3'];
+    
+        $bonus_amount = ($level_percentage / 100) * $amount ;
+    
+        $sql = "INSERT INTO referral_bonus (`user_id`,`referral_user_id`,`level`,`recharged_amount`,`level_percentage`,`bonus_amount`) VALUES ('$user_id',$level3_referral_id,$level,$amount,$level_percentage,$bonus_amount)";
+        $db->sql($sql);
+        $res = $db->getResult();
+    }
+
+
+
+
     $response['success'] = true;
     $response['message'] = "Amount Recharged Successfully";
 

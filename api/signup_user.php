@@ -42,7 +42,41 @@ else{
     for ($i = 0; $i < 10; $i++) {
         $myrefercode .= $chars[mt_rand(0, strlen($chars) - 1)];
     }
-    $sql = "INSERT INTO users(`name`,`mobile`,`referral`,`my_refer_code`)VALUES('$name','$mobile','$referral','$myrefercode')";
+
+    $referral = (isset($res[0]['referral']) && $res[0]['referral'] != "") ? $db->escapeString($res[0]['referral']) : "";
+    $level1_referral_id = "0";
+    $level2_referral_id = "0";
+    $level3_referral_id = "0";
+    if($referral != ''){
+        $sql = "SELECT * FROM `users` WHERE my_refer_code='$referral'";
+        $db->sql($sql);
+        $res = $db->getResult();
+        $level1_referral_id = (isset($res[0]['id']) && $res[0]['id'] != "") ? $db->escapeString($res[0]['id']) : "0";
+        $referral2 = (isset($res[0]['referral']) && $res[0]['referral'] != "") ? $db->escapeString($res[0]['referral']) : "";
+
+    }
+    if($level1_referral_id != '0'){
+        $sql = "SELECT * FROM `users` WHERE my_refer_code='$referral2'";
+        $db->sql($sql);
+        $res = $db->getResult();
+        $level2_referral_id = (isset($res[0]['id']) && $res[0]['id'] != "") ? $db->escapeString($res[0]['id']) : "0";
+        $referral3 = (isset($res[0]['referral']) && $res[0]['referral'] != "") ? $db->escapeString($res[0]['referral']) : "";
+
+    }
+    if($level2_referral_id != '0'){
+        $sql = "SELECT * FROM `users` WHERE my_refer_code='$referral3'";
+        $db->sql($sql);
+        $res = $db->getResult();
+        $level3_referral_id = (isset($res[0]['id']) && $res[0]['id'] != "") ? $db->escapeString($res[0]['id']) : "0";
+
+    }
+
+
+
+    $sql = "INSERT INTO users(`name`,`mobile`,`referral`,`my_refer_code`,`level1_referral_id`,`level2_referral_id`,`level3_referral_id`)VALUES('$name','$mobile','$referral','$myrefercode',$level1_referral_id,$level2_referral_id,$level3_referral_id)";
+    $db->sql($sql);
+    $res = $db->getResult();
+    $sql = "SELECT * FROM users WHERE mobile ='$mobile'";
     $db->sql($sql);
     $res = $db->getResult();
     $response['success'] = true;
