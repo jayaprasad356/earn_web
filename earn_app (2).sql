@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2022 at 11:13 PM
+-- Generation Time: Apr 27, 2022 at 07:38 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `earnapp`
+-- Database: `earn_app`
 --
 
 -- --------------------------------------------------------
@@ -53,7 +53,29 @@ INSERT INTO `daily_income` (`id`, `user_id`, `plan_id`, `purchased_id`, `credite
 (62, 13, 2, 2, 65, '2022-03-17', NULL, '2022-04-15 08:14:58'),
 (63, 13, 2, 2, 65, '2022-03-18', NULL, '2022-04-15 08:14:58'),
 (64, 13, 2, 2, 65, '2022-03-19', NULL, '2022-04-15 08:14:58'),
-(65, 13, 2, 2, 65, '2022-03-20', NULL, '2022-04-15 08:14:58');
+(65, 13, 2, 2, 65, '2022-03-20', NULL, '2022-04-15 08:14:58'),
+(66, 13, 1, 1, 30, '2022-04-16', NULL, '2022-04-26 03:10:32'),
+(67, 13, 1, 1, 30, '2022-04-17', NULL, '2022-04-26 03:10:32'),
+(68, 13, 1, 1, 30, '2022-04-18', NULL, '2022-04-26 03:10:32'),
+(69, 13, 1, 1, 30, '2022-04-19', NULL, '2022-04-26 03:10:32'),
+(70, 13, 1, 1, 30, '2022-04-20', NULL, '2022-04-26 03:10:32'),
+(71, 13, 1, 1, 30, '2022-04-21', NULL, '2022-04-26 03:10:32'),
+(72, 13, 1, 1, 30, '2022-04-22', NULL, '2022-04-26 03:10:32'),
+(73, 13, 1, 1, 30, '2022-04-23', NULL, '2022-04-26 03:10:32'),
+(74, 13, 1, 1, 30, '2022-04-24', NULL, '2022-04-26 03:10:32'),
+(75, 13, 1, 1, 30, '2022-04-25', NULL, '2022-04-26 03:10:32'),
+(76, 13, 1, 3, 30, '2022-04-16', NULL, '2022-04-26 03:10:32'),
+(77, 13, 1, 3, 30, '2022-04-17', NULL, '2022-04-26 03:10:32'),
+(78, 13, 1, 3, 30, '2022-04-18', NULL, '2022-04-26 03:10:32'),
+(79, 13, 1, 3, 30, '2022-04-19', NULL, '2022-04-26 03:10:32'),
+(80, 13, 1, 3, 30, '2022-04-20', NULL, '2022-04-26 03:10:32'),
+(81, 13, 1, 3, 30, '2022-04-21', NULL, '2022-04-26 03:10:32'),
+(82, 13, 1, 3, 30, '2022-04-22', NULL, '2022-04-26 03:10:32'),
+(83, 13, 1, 3, 30, '2022-04-23', NULL, '2022-04-26 03:10:32'),
+(84, 13, 1, 3, 30, '2022-04-24', NULL, '2022-04-26 03:10:32'),
+(85, 13, 1, 3, 30, '2022-04-25', NULL, '2022-04-26 03:10:32'),
+(86, 13, 1, 1, 30, '2022-04-26', NULL, '2022-04-26 11:57:47'),
+(87, 13, 1, 3, 30, '2022-04-26', NULL, '2022-04-26 11:57:47');
 
 -- --------------------------------------------------------
 
@@ -89,9 +111,11 @@ INSERT INTO `earn_settings` (`id`, `title`, `account_number`, `ifsc_code`, `bank
 
 CREATE TABLE `plans` (
   `id` int(11) NOT NULL,
+  `name` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `daily_income` int(11) NOT NULL,
   `price` int(11) NOT NULL,
   `valid` int(11) NOT NULL,
+  `image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -100,17 +124,17 @@ CREATE TABLE `plans` (
 -- Dumping data for table `plans`
 --
 
-INSERT INTO `plans` (`id`, `daily_income`, `price`, `valid`, `last_updated`, `date_created`) VALUES
-(1, 30, 600, 90, NULL, '2022-04-12 13:26:24'),
-(2, 65, 1200, 90, NULL, '2022-04-12 13:27:14'),
-(3, 130, 2400, 90, NULL, '2022-04-12 13:28:05'),
-(4, 270, 5000, 90, '2022-04-12 13:29:04', '2022-04-12 13:28:05'),
-(5, 450, 8000, 90, '2022-04-12 13:29:22', '2022-04-12 13:26:24'),
-(6, 800, 15000, 90, '2022-04-12 13:29:43', '2022-04-12 13:27:14'),
-(7, 1300, 25000, 90, '2022-04-12 13:30:10', '2022-04-12 13:28:05'),
-(8, 2100, 40000, 90, '2022-04-12 13:30:43', '2022-04-12 13:28:05'),
-(9, 3200, 60000, 90, '2022-04-12 13:32:08', '2022-04-12 13:28:05'),
-(10, 4200, 80000, 90, '2022-04-12 13:32:15', '2022-04-12 13:28:05');
+INSERT INTO `plans` (`id`, `name`, `daily_income`, `price`, `valid`, `image`, `last_updated`, `date_created`) VALUES
+(1, 'Lava', 30, 600, 90, 'upload/images/1650944218.4368.jpg', '2022-04-26 03:36:58', '2022-04-12 13:26:24'),
+(2, 'Micromax', 65, 1200, 90, 'upload/images/1650974495.2622.png', '2022-04-26 12:01:35', '2022-04-12 13:27:14'),
+(3, 'Motorola', 130, 2400, 90, 'upload/images/1650974559.0376.jpg', '2022-04-26 12:02:39', '2022-04-12 13:28:05'),
+(4, 'Vivo', 270, 5000, 90, 'upload/images/1650974607.4362.jpg', '2022-04-26 12:03:27', '2022-04-12 13:28:05'),
+(5, 'Oppo', 450, 8000, 90, 'upload/images/1650974689.6308.jpg', '2022-04-26 12:04:49', '2022-04-12 13:26:24'),
+(6, 'Realme', 800, 15000, 90, 'upload/images/1650974757.4974.png', '2022-04-26 12:05:57', '2022-04-12 13:27:14'),
+(7, 'Xiaomi', 1300, 25000, 90, 'upload/images/1650974818.2144.png', '2022-04-26 12:06:58', '2022-04-12 13:28:05'),
+(8, 'One Plus', 2100, 40000, 90, 'upload/images/1650974888.3539.png', '2022-04-26 12:08:08', '2022-04-12 13:28:05'),
+(9, 'Asus Rog', 3200, 60000, 90, 'upload/images/1650974933.9191.jpg', '2022-04-26 12:08:53', '2022-04-12 13:28:05'),
+(10, 'IPhone', 4200, 80000, 90, 'upload/images/1650975006.388.png', '2022-04-26 12:10:06', '2022-04-12 13:28:05');
 
 -- --------------------------------------------------------
 
@@ -174,7 +198,44 @@ INSERT INTO `recharges` (`id`, `user_id`, `amount`, `status`, `payment_type`, `l
 (12, 13, 500, 1, 'paytm', NULL, '2022-04-15 06:24:40'),
 (13, 13, 700, 1, 'paytm', NULL, '2022-04-15 06:24:56'),
 (14, 13, 500, 1, 'paytm', NULL, '2022-04-15 09:02:32'),
-(15, 13, 500, 1, 'paytm', NULL, '2022-04-15 09:14:54');
+(15, 13, 500, 1, 'paytm', NULL, '2022-04-15 09:14:54'),
+(16, 13, 50, 1, 'upi', NULL, '2022-04-25 10:22:39'),
+(17, 13, 50, 1, 'upi', NULL, '2022-04-25 10:28:59'),
+(18, 13, 100, 1, 'upi', NULL, '2022-04-25 10:29:25'),
+(19, 13, 1000, 1, 'upi', NULL, '2022-04-25 10:29:38'),
+(20, 13, 1000, 1, 'upi', NULL, '2022-04-25 11:34:41'),
+(21, 18, 1000, 1, 'upi', NULL, '2022-04-25 11:35:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `referral_bonus`
+--
+
+CREATE TABLE `referral_bonus` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `referral_user_id` int(11) NOT NULL,
+  `level` tinyint(4) NOT NULL,
+  `recharged_amount` float NOT NULL,
+  `level_percentage` tinyint(4) NOT NULL,
+  `bonus_amount` float DEFAULT NULL,
+  `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `date_created` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `referral_bonus`
+--
+
+INSERT INTO `referral_bonus` (`id`, `user_id`, `referral_user_id`, `level`, `recharged_amount`, `level_percentage`, `bonus_amount`, `last_updated`, `date_created`) VALUES
+(1, 13, 11, 1, 50, 4, NULL, NULL, '2022-04-25 10:22:39'),
+(2, 13, 11, 1, 50, 4, 2, NULL, '2022-04-25 10:28:59'),
+(3, 13, 11, 1, 100, 10, 10, NULL, '2022-04-25 10:29:25'),
+(4, 13, 11, 1, 1000, 10, 100, NULL, '2022-04-25 10:29:38'),
+(5, 18, 14, 1, 1000, 10, 100, NULL, '2022-04-25 11:35:33'),
+(6, 18, 13, 2, 1000, 5, 50, NULL, '2022-04-25 11:35:33'),
+(7, 18, 11, 3, 1000, 3, 30, NULL, '2022-04-25 11:35:33');
 
 -- --------------------------------------------------------
 
@@ -195,7 +256,7 @@ CREATE TABLE `refer_commission` (
 --
 
 INSERT INTO `refer_commission` (`id`, `title`, `level_1`, `level_2`, `level_3`) VALUES
-(1, 'refer_commission', 4, 6, 5);
+(1, 'refer_commission', 10, 5, 3);
 
 -- --------------------------------------------------------
 
@@ -246,7 +307,10 @@ CREATE TABLE `users` (
   `referral` text DEFAULT NULL,
   `my_refer_code` varchar(28) DEFAULT NULL,
   `balance` double DEFAULT NULL,
-  `earn` double NOT NULL,
+  `earn` double DEFAULT NULL,
+  `level1_referral_id` int(11) NOT NULL,
+  `level2_referral_id` int(11) NOT NULL,
+  `level3_referral_id` int(11) NOT NULL,
   `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -255,12 +319,45 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `mobile`, `referral`, `my_refer_code`, `balance`, `earn`, `last_updated`, `date_created`) VALUES
-(11, 'Aravind', '9025635524', '2002', 'I1I2BSDBSD', 0, 0, '2022-04-13 16:49:45', '2022-04-05 16:09:21'),
-(12, 'Bala', '9055635524', 'I1I2BSDBSD', 'DDI2BAABSD', 0, 0, '2022-04-06 14:43:42', '2022-04-05 16:09:21'),
-(13, 'Prasad', '92837323', 'I1I2BSDBSD', 'JAGPXA1FE6', 400, 680, '2022-04-16 18:10:22', '2022-04-06 14:33:53'),
-(14, 'Surya', '9090909090', 'JAGPXA1FE6', 'CPP3HK8Y8U', 0, 0, '2022-04-15 08:07:49', '2022-04-13 15:07:18'),
-(15, 'Rahul', '9638527410', 'THUsbsj', 'KP51YU4WTR', NULL, 0, NULL, '2022-04-15 09:14:36');
+INSERT INTO `users` (`id`, `name`, `mobile`, `referral`, `my_refer_code`, `balance`, `earn`, `level1_referral_id`, `level2_referral_id`, `level3_referral_id`, `last_updated`, `date_created`) VALUES
+(11, 'Aravind', '9025635524', '2002', 'I1I2BSDBSD', 0, 0, 0, 0, 0, '2022-04-25 11:21:59', '2022-04-05 16:09:21'),
+(12, 'Bala', '9055635524', 'I1I2BSDBSD', 'DDI2BAABSD', 0, 0, 0, 0, 0, '2022-04-25 11:22:02', '2022-04-05 16:09:21'),
+(13, 'Prasad', '8778624682', 'I1I2BSDBSD', 'JAGPXA1FE6', 2600, 1340, 11, 0, 0, '2022-04-27 11:40:54', '2022-04-06 14:33:53'),
+(14, 'Surya', '9090909090', 'JAGPXA1FE6', 'CPP3HK8Y8U', 0, 0, 0, 0, 0, '2022-04-15 08:07:49', '2022-04-13 15:07:18'),
+(15, 'Rahul', '9638527410', 'THUsbsj', 'KP51YU4WTR', NULL, 0, 0, 0, 0, NULL, '2022-04-15 09:14:36'),
+(18, 'Prative', '7897897890', 'CPP3HK8Y8U', 'AI9RLYPH67', 1000, 0, 14, 13, 11, '2022-04-26 06:26:31', '2022-04-25 11:02:34'),
+(22, 'Virat', '8887776662', 'JAGPXA1FE6', 'C5JQ0KXMP4', NULL, 0, 13, 11, 0, NULL, '2022-04-25 11:12:16'),
+(25, 'Vinoth', '8833883838', 'I1I2BSDBSD', 'D4ONKZIPF5', NULL, 0, 11, 0, 0, NULL, '2022-04-25 11:15:59'),
+(26, 'Kandha', '8833883839', 'DDI2BAABSD', 'WAW4HIGH4V', NULL, 0, 12, 11, 0, NULL, '2022-04-25 11:16:48'),
+(30, 'Nandha', '8833883830', '', 'ZJOQGK1ABH', NULL, NULL, 0, 0, 0, NULL, '2022-04-25 11:24:49'),
+(31, 'prasad', '8778624681', '', 'WYQS2X4P0S', NULL, NULL, 0, 0, 0, NULL, '2022-04-26 03:08:29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `withdrawals`
+--
+
+CREATE TABLE `withdrawals` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `amount` float NOT NULL,
+  `status` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `withdrawals`
+--
+
+INSERT INTO `withdrawals` (`id`, `user_id`, `amount`, `status`) VALUES
+(1, 18, 1000, 1),
+(2, 18, 1000, 1),
+(3, 18, 1000, 1),
+(4, 18, 1000, 1),
+(5, 18, 1000, 1),
+(6, 18, 1000, 1),
+(7, 18, 1000, 1),
+(8, 18, 1000, 1);
 
 --
 -- Indexes for dumped tables
@@ -297,6 +394,12 @@ ALTER TABLE `recharges`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `referral_bonus`
+--
+ALTER TABLE `referral_bonus`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `refer_commission`
 --
 ALTER TABLE `refer_commission`
@@ -315,6 +418,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `withdrawals`
+--
+ALTER TABLE `withdrawals`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -322,7 +431,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `daily_income`
 --
 ALTER TABLE `daily_income`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `earn_settings`
@@ -346,7 +455,13 @@ ALTER TABLE `purchased_plans`
 -- AUTO_INCREMENT for table `recharges`
 --
 ALTER TABLE `recharges`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `referral_bonus`
+--
+ALTER TABLE `referral_bonus`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `refer_commission`
@@ -364,7 +479,13 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT for table `withdrawals`
+--
+ALTER TABLE `withdrawals`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -16,9 +16,20 @@ $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num >= 1) {
+
+    foreach ($res as $row) {
+        $temp['id'] = $row['id'];
+        $temp['name'] = $row['name'];
+        $temp['daily_income'] = $row['daily_income'];
+        $temp['price'] = $row['price'];
+        $temp['valid'] = $row['valid'];
+        $temp['image'] = DOMAIN_URL  .$row['image'];
+        $rows[] = $temp;
+        
+    }
     $response['success'] = true;
     $response['message'] = "Plans Listed Successfully";
-    $response['data'] = $res;
+    $response['data'] = $rows;
     print_r(json_encode($response));
 
 }else{

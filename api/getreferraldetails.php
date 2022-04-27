@@ -13,92 +13,131 @@ $db = new Database();
 $db->connect();
 
 if (isset($_POST['level']) && $_POST['level'] == '1'){
-    if (empty($_POST['referral'])) {
+    if (empty($_POST['user_id'])) {
         $response['success'] = false;
-        $response['message'] = "Referral Code is Empty";
+        $response['message'] = "User ID is Empty";
         print_r(json_encode($response));
         return false;
     }
     
-    $referral = $db->escapeString($_POST['referral']);
-    $sql = "SELECT * FROM `users` WHERE referral='$referral'";
+    $user_id = $db->escapeString($_POST['user_id']);
+    $sql = "SELECT * FROM `users` WHERE level1_referral_id='$user_id'";
     $db->sql($sql);
     $res = $db->getResult();
+    $num = $db->numRows($res);
+
+    $totalcontribution = 0;
+    foreach ($res as $row) {
+        
+        $id = $row['id'];
+        $temp['id'] = $row['id'];
+        $temp['name'] = $row['name'];
+        $temp['mobile'] = $row['mobile'];
+        $sql = "SELECT SUM(bonus_amount) AS contribution FROM `referral_bonus` WHERE referral_user_id='$user_id' AND user_id='$id' AND level = 1";
+        $db->sql($sql);
+        $res = $db->getResult();
+        $contribution = $res[0]['contribution'];
+        if($res[0]['contribution'] == null){
+            $contribution = 0;
+
+        }
+        $temp['contribution'] = $contribution;
+        $totalcontribution+= $contribution;
+        $rows[] = $temp;
+        
+    }
     
     $response['success'] = true;
     $response['message'] = "Level 1 User Details Retrived Successfully";
-    $response['data'] = $res;
+    $response['total_contribution'] = $totalcontribution;
+    $response['team_size'] = $num;
+    $response['data'] = $rows;
     print_r(json_encode($response));
 
 }
 if (isset($_POST['level']) && $_POST['level'] == '2'){
-    if (empty($_POST['referral'])) {
+    if (empty($_POST['user_id'])) {
         $response['success'] = false;
-        $response['message'] = "Referral Code is Empty";
+        $response['message'] = "User ID is Empty";
         print_r(json_encode($response));
         return false;
     }
     
-    $referral = $db->escapeString($_POST['referral']);
-    $sql = "SELECT * FROM `users` WHERE referral=$referral";
+    $user_id = $db->escapeString($_POST['user_id']);
+    $sql = "SELECT * FROM `users` WHERE level2_referral_id='$user_id'";
     $db->sql($sql);
     $res = $db->getResult();
+    $num = $db->numRows($res);
+    $totalcontribution = 0;
+
     foreach ($res as $row) {
-
-        $referral2 =  $row['my_refer_code'];
-        $sql = "SELECT * FROM `users` WHERE referral=$referral2";
+        $id = $row['id'];
+        $temp['id'] = $row['id'];
+        $temp['name'] = $row['name'];
+        $temp['mobile'] = $row['mobile'];
+        $sql = "SELECT SUM(bonus_amount) AS contribution FROM `referral_bonus` WHERE referral_user_id='$user_id' AND user_id='$id' AND level = 2";
         $db->sql($sql);
-        $res2 = $db->getResult();
-        
-        //$rows[] = $tempRow;
+        $res = $db->getResult();
+        $contribution = $res[0]['contribution'];
+        if($res[0]['contribution'] == null){
+            $contribution = 0;
 
+        }
+        $temp['contribution'] = $contribution;
+        $totalcontribution+= $contribution;
+        $rows[] = $temp;
+        
     }
     
     $response['success'] = true;
     $response['message'] = "Level 2 User Details Retrived Successfully";
-    $response['data'] = $res2;
+    $response['total_contribution'] = $totalcontribution;
+    $response['team_size'] = $num;
+    $response['data'] = $rows;
     print_r(json_encode($response));
-
-
 
 }
 if (isset($_POST['level']) && $_POST['level'] == '3'){
-    if (empty($_POST['referral'])) {
+    if (empty($_POST['user_id'])) {
         $response['success'] = false;
-        $response['message'] = "Referral Code is Empty";
+        $response['message'] = "User ID is Empty";
         print_r(json_encode($response));
         return false;
     }
     
-    $referral = $db->escapeString($_POST['referral']);
-    $sql = "SELECT * FROM `users` WHERE referral=$referral";
+    $user_id = $db->escapeString($_POST['user_id']);
+    $sql = "SELECT * FROM `users` WHERE level3_referral_id='$user_id'";
     $db->sql($sql);
     $res = $db->getResult();
+    $num = $db->numRows($res);
+    $totalcontribution = 0;
+
     foreach ($res as $row) {
-
-        $referral2 =  $row['my_refer_code'];
-        $sql = "SELECT * FROM `users` WHERE referral=$referral2";
+        $id = $row['id'];
+        $temp['id'] = $row['id'];
+        $temp['name'] = $row['name'];
+        $temp['mobile'] = $row['mobile'];
+        $sql = "SELECT SUM(bonus_amount) AS contribution FROM `referral_bonus` WHERE referral_user_id='$user_id' AND user_id='$id' AND level = 3";
         $db->sql($sql);
-        $res2 = $db->getResult();
-        foreach ($res2 as $row) {
+        $res = $db->getResult();
+        $contribution = $res[0]['contribution'];
+        if($res[0]['contribution'] == null){
+            $contribution = 0;
 
-            $referral3 =  $row['my_refer_code'];
-            $sql = "SELECT * FROM `users` WHERE referral=$referral3";
-            $db->sql($sql);
-            $res3 = $db->getResult();
-            //$rows[] = $tempRow;
-    
         }
+        $temp['contribution'] = $contribution;
+        $totalcontribution+= $contribution;
+        $rows[] = $temp;
         
-
     }
     
     $response['success'] = true;
     $response['message'] = "Level 3 User Details Retrived Successfully";
-    $response['data'] = $res3;
+    $response['total_contribution'] = $totalcontribution;
+    $response['team_size'] = $num;
+    $response['data'] = $rows;
     print_r(json_encode($response));
 
 }
-
 
 ?>
