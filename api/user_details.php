@@ -23,9 +23,33 @@ $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num >= 1) {
+    foreach ($res as $row) {
+        $temp['id'] = $row['id'];
+        $temp['name'] = $row['name'];
+        $temp['mobile'] = $row['mobile'];
+        $temp['referral'] = $row['referral'];
+        $temp['my_refer_code'] = $row['my_refer_code'];
+        $balance = $row['balance'];
+        if($balance == NULL){
+            $balance = 0;
+
+        }
+        $temp['balance'] = $balance;
+
+        $earn = $row['earn'];
+        if($earn == NULL){
+            $earn = 0;
+
+        }
+        $temp['earn'] = $earn;
+        $temp['level1_referral_id'] = $row['level1_referral_id'];
+        $temp['level2_referral_id'] = $row['level2_referral_id'];
+        $temp['level3_referral_id'] = $row['level3_referral_id'];
+        $rows[] = $temp;
+    }
     $response['success'] = true;
     $response['message'] = "User Details Retrieved Successfully";
-    $response['data'] = $res;
+    $response['data'] = $rows;
     print_r(json_encode($response));
 
 }else{

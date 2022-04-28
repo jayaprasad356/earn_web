@@ -34,6 +34,14 @@ $res = $db->getResult();
 $totalprofit = $res['0']['totalprofit'];
 $response['success'] = true;
 $response['message'] = "User Details Count Found";
+if($todayprofit == null){
+    $todayprofit = 0;
+
+}
+if($totalprofit == null){
+    $totalprofit = 0;
+
+}
 $response['purchased_plans'] = $purchased_planscount;
 $response['todayprofit'] = $todayprofit;
 $response['totalprofit'] = $totalprofit;
