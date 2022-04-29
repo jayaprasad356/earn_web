@@ -32,15 +32,15 @@ $newearn = $earn - $amount;
 $num = $db->numRows($res);
 if ($num == 1) {
     if($amount <= $earn){
-        $sql = "INSERT INTO withdrawals (`user_id`,`amount`,`status`) VALUES ('$user_id','$amount',1)";
+        $sql = "INSERT INTO withdrawals (`user_id`,`amount`,`status`) VALUES ('$user_id','$amount',0)";
         $db->sql($sql);
         $res = $db->getResult();
         
-        $sql = "UPDATE users SET `earn`= $newearn WHERE `id`=" . $user_id;
-        $db->sql($sql);
-        $res = $db->getResult();
+        // $sql = "UPDATE users SET `earn`= $newearn WHERE `id`=" . $user_id;
+        // $db->sql($sql);
+        // $res = $db->getResult();
         $response['success'] = true;
-        $response['message'] = "Amount Withdrawal Successfully";
+        $response['message'] = "Amount Withdrawal Requested Successfully";
 
     }
     else{

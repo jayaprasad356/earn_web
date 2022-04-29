@@ -92,6 +92,38 @@ if (isset($_GET['table']) && $_GET['table'] == 'plans') {
 $bulkData['rows'] = $rows;
 print_r(json_encode($bulkData));
 }
+if (isset($_GET['table']) && $_GET['table'] == 'withdrawals') {
+    $where = '';
+    
+    $sql = "SELECT *,withdrawals.id AS id FROM withdrawals,users WHERE withdrawals.user_id = users.id ORDER BY status";
+    $db->sql($sql);
+    $res = $db->getResult();
+    $rows = array();
+    $tempRow = array();
+    foreach ($res as $row) {
+
+        $operate = ' <a href="update_withdrawals.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
+        $tempRow['id'] = $row['id'];
+        $tempRow['user_id'] = $row['user_id'];
+        $tempRow['name'] = $row['name'];
+        $tempRow['mobile'] = $row['mobile'];
+        $tempRow['amount'] = $row['amount'];
+        $status = $row['status'];
+        if($status == '0'){
+            $status = 'Pending';
+        }
+        else{
+            $status = 'Completed';
+
+        }
+        $tempRow['status'] = $status;
+        $tempRow['date_created'] = $row['date_created'];
+        $tempRow['operate'] = $operate;
+        $rows[] = $tempRow;
+    }
+$bulkData['rows'] = $rows;
+print_r(json_encode($bulkData));
+}
 if (isset($_GET['table']) && $_GET['table'] == 'purchasedplans') {
     $user_id = $_GET['user_id'];
 

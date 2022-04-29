@@ -43,7 +43,7 @@ else{
         $myrefercode .= $chars[mt_rand(0, strlen($chars) - 1)];
     }
 
-    $referral = (isset($res[0]['referral']) && $res[0]['referral'] != "") ? $db->escapeString($res[0]['referral']) : "";
+    //$referral = (isset($res[0]['referral']) && $res[0]['referral'] != "") ? $db->escapeString($res[0]['referral']) : "";
     $level1_referral_id = "0";
     $level2_referral_id = "0";
     $level3_referral_id = "0";

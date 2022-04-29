@@ -182,6 +182,13 @@ $res_logo = $db->getResult();
                     </a>
                 </li>
                 <li class="treeview">
+                    <a href="withdrawals.php">
+                        <i class="fa fa-bullseye"></i>
+                        <span>Withdrawals</span>
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </a>
+                </li>
+                <li class="treeview">
                     <a href="refercommissions.php">
                         <i class="fa fa-bullseye"></i>
                         <span>Refer Commission</span>
@@ -195,13 +202,13 @@ $res_logo = $db->getResult();
                         <i class="fa fa-angle-right pull-right"></i>
                     </a>
                 </li>
-                <li class="treeview">
+                <!-- <li class="treeview">
                     <a href="payment-methods-settings.php">
                         <i class="fa fa-bullseye"></i>
                         <span>Pay U Money</span>
                         <i class="fa fa-angle-right pull-right"></i>
                     </a>
-                </li>
+                </li> -->
                 
             </ul>
             </section>
