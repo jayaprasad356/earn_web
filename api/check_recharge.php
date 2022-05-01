@@ -7,35 +7,41 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-
 include_once('../includes/crud.php');
-
 $db = new Database();
 $db->connect();
 
-if (empty($_POST['mobile'])) {
+if (empty($_POST['amount'])) {
     $response['success'] = false;
-    $response['message'] = "Mobilenumber is Empty";
+    $response['message'] = "Amount is Empty";
     print_r(json_encode($response));
     return false;
 }
 
-$mobile= $db->escapeString($_POST['mobile']);
-$sql = "SELECT * FROM users WHERE mobile ='$mobile'";
+$amount = $db->escapeString($_POST['amount']);
+
+$sql = "SELECT * FROM earn_settings WHERE title = 'earn_settings'";
 $db->sql($sql);
 $res = $db->getResult();
-$num = $db->numRows($res);
-if ($num == 1){
+$minirech = $res[0]['recharge_setting'];
+if($amount <= $minirech){
+    
     $response['success'] = true;
-    $response['message'] = "Logged In Successfully";
-    $response['data'] = $res;
+    $response['message'] = "Eligible Successfully";
+
+
 }
 else{
     $response['success'] = false;
-    $response['message'] = "Mobile Number Not Registered";
-    $response['data'] = $res;
+    $response['message'] = "Mnimium Rexcharge amount Rs. ". $minirech;
 
 }
+
+
 print_r(json_encode($response));
+   
+    
+   
+
 
 ?>
