@@ -15,28 +15,9 @@ $sql = "SELECT * FROM earn_settings";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
-if ($num >= 1) {
-    foreach ($res as $row) {
-        $temp['id'] = $row['id'];
-        $temp['name'] = $row['name'];
-        $temp['daily_income'] = $row['daily_income'];
-        $temp['price'] = $row['price'];
-        $temp['valid'] = $row['valid'];
-        $temp['image'] = DOMAIN_URL  .$row['image'];
-        $rows[] = $temp;
-        
-    }
-
-    $response['success'] = true;
-    $response['message'] = "Settings Successfully Retrived";
-    $response['data'] = $rows;
-    print_r(json_encode($response));
-
-}else{
-    $response['success'] = false;
-    $response['message'] = "No Plans Found";
-    print_r(json_encode($response));
-
-}
+$response['success'] = true;
+$response['message'] = "Settings Successfully Retrived";
+$response['data'] = $res;
+print_r(json_encode($response));
 
 ?>

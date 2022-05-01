@@ -10,7 +10,7 @@ $db = new Database();
 $db->connect();
 // session_start();
 $withdrawals_id = $_GET['id'];
-$sql = "SELECT * FROM withdrawals,users WHERE withdrawals.user_id = users.id AND withdrawals.id = '$withdrawals_id'";
+$sql = "SELECT *,withdrawals.id AS id FROM withdrawals,users WHERE withdrawals.user_id = users.id AND withdrawals.id = '$withdrawals_id'";
 $db->sql($sql);
 $res = $db->getResult();
 if($res[0]['status'] == '0'){
@@ -19,9 +19,11 @@ if($res[0]['status'] == '0'){
 else if($res[0]['status'] == '1'){
     $status = 'Completed';
 }
+$upi = $res[0]['upi'];
+$amount = $res[0]['amount'];
 ?>
 <section class="content-header">
-    <h1>View Order</h1>
+    <h1>View Withdrawal</h1>
     <?php echo isset($error['add_menu']) ? $error['add_menu'] : ''; ?>
     <ol class="breadcrumb">
         <li><a href="home.php"><i class="fa fa-home"></i> Home</a></li>
@@ -33,7 +35,7 @@ else if($res[0]['status'] == '1'){
             <div class="col-md-6">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Order Detail</h3>
+                        <h3 class="box-title">Withdrawal Detail</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                     
@@ -49,6 +51,10 @@ else if($res[0]['status'] == '1'){
                             <tr>
                                 <th style="width: 200px">User Mobile</th>
                                 <td><?php echo $res[0]['mobile'] ?></td>
+                            </tr>
+                            <tr>
+                                <th style="width: 200px">UPI</th>
+                                <td><?php echo $res[0]['upi'] ?></td>
                             </tr>
                             <tr>
                                 <th style="width: 200px">Amount</th>
@@ -68,8 +74,9 @@ else if($res[0]['status'] == '1'){
                     <?php
                     if($res[0]['status'] != '1'){?>
                         <div class="box-footer clearfix">
-                        <a href=""><button class="btn btn-primary">Pay Now</button></a>
-                    
+                        <input type="submit" class="btn btn-primary" value="Pay Now" name="submit" onclick="payAmount(<?= $amount ?>,'<?= $upi ?>','<?= $res[0]['id'] ?>')">
+                            
+                        
                     </div>
                     <?php
 
@@ -77,36 +84,46 @@ else if($res[0]['status'] == '1'){
                      ?>
 
                 </div><!-- /.box -->
-            </div>
+            </div></section>
         </div>
-</section>
+
 <div class="separator"> </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 <script>
-    $('#add_offer_form').validate({
-        rules: {
-            budget_id: "required",
+
+    function payAmount(amount,upi,id){
+        $.ajax({
+                url: 'api/enalo.php',
+                type: 'post',
+                data: {
+                    amt: amount , upi : upi , id: id ,
+                }, 
+                success: function (data) {
+                    var data = JSON.parse(data);
+                    if(data.status == 'success'){
+                        alert("Amount Paid Successfully");
+                        location.reload(true);
+
+                    }
+                //    window.location.href = 'http://localhost/razorpay/success.php';
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    alert("Failed ");
+                }
+            });
+       
+
             
+    }
 
-        }
-    });
-    $('#btnClear').on('click', function() {
-        for (instance in CKEDITOR.instances) {
-            CKEDITOR.instances[instance].setData('');
-        }
-    });
-    
+
+
 </script>
-
 <script>
     $('#add_offer_form').on('submit', function(e) {
         e.preventDefault();
-        var formData = new FormData(this);
-        
-        if ($("#add_offer_form").validate().form()) {
-            if(document.getElementById("wastage").value != '' || document.getElementById("pricegram").value != ''){
-                $.ajax({
+        $.ajax({
                     type: 'POST',
                     url: $(this).attr('action'),
                     data: formData,
@@ -125,16 +142,6 @@ else if($res[0]['status'] == '1'){
                         
                     }
                 });
-
-            }else{
-                alert("Enter Atleast Wastage or Discount Per gram")
-            }
-        
-
-            
-            
-
-        }
     
     });
 </script>

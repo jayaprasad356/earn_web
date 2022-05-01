@@ -40,13 +40,19 @@ if (isset($_POST['btnUpdate'])) {
             if ($earnsettings_result == 1) {
                 $error['add_menu'] = "<section class='content-header'>
                                                 <span class='label label-success'>Earn Details Updated Successfully</span>
-                                                <h4><small><a  href='users.php'><i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Users</a></small></h4>
+                                                
                                                  </section>";
             } else {
                 $error['add_menu'] = " <span class='label label-danger'>Failed</span>";
             }
 
-    }
+}
+
+$sql = "SELECT * FROM earn_settings WHERE title= 'earn_settings'";
+$db->sql($sql);
+$res = $db->getResult();
+foreach ($res as $row)
+    $data = $row;
 ?>
 <section class="content-header">
     <h1>Update Details</h1>
@@ -76,11 +82,11 @@ if (isset($_POST['btnUpdate'])) {
                             <div class="form-group">
                                 <div class='col-md-4'>
                                     <label for="exampleInputEmail1">Account Number</label> <?php echo isset($error['account_number']) ? $error['account_number'] : ''; ?>
-                                    <input type="text" class="form-control" name="account_number">
+                                    <input type="text" class="form-control" name="account_number" value="<?php echo $data['account_number']?>">
                                 </div>
                                 <div class='col-md-4'>
                                     <label for="exampleInputEmail1">IFSC Code</label> <?php echo isset($error['ifsc_code']) ? $error['ifsc_code'] : ''; ?>
-                                    <input type="text" class="form-control" name="ifsc_code" >
+                                    <input type="text" class="form-control" name="ifsc_code" value="<?php echo $data['ifsc_code']?>" >
                                 </div>
                             </div>
 
@@ -90,11 +96,11 @@ if (isset($_POST['btnUpdate'])) {
                             <div class="form-group">
                                 <div class='col-md-4'>
                                     <label for="exampleInputEmail1">Account Holder Name</label> <?php echo isset($error['name']) ? $error['name'] : ''; ?>
-                                    <input type="text" class="form-control" name="name">
+                                    <input type="text" class="form-control" name="name" value="<?php echo $data['name']?>">
                                 </div>
                                 <div class='col-md-4'>
                                     <label for="exampleInputEmail1">Bank Name</label> <?php echo isset($error['bank_name']) ? $error['bank_name'] : ''; ?>
-                                    <input type="text" class="form-control" name="bank_name" >
+                                    <input type="text" class="form-control" name="bank_name" value="<?php echo $data['bank_name']?>">
                                 </div>
                             </div>
 
@@ -107,11 +113,11 @@ if (isset($_POST['btnUpdate'])) {
                             <div class="form-group">
                                 <div class='col-md-4'>
                                     <label for="exampleInputEmail1">UPI id</label> <?php echo isset($error['upi_id']) ? $error['upi_id'] : ''; ?>
-                                    <input type="text" class="form-control" name="upi_id">
+                                    <input type="text" class="form-control" name="upi_id" value="<?php echo $data['upi_id']?>">
                                 </div>
                                 <div class='col-md-4'>
                                     <label for="exampleInputEmail1">Withdraw minimum setting</label> <?php echo isset($error['minimum_setting']) ? $error['minimum_setting'] : ''; ?>
-                                    <input type="text" class="form-control" name="minimum_setting" >
+                                    <input type="text" class="form-control" name="minimum_setting" value="<?php echo $data['minimum_setting']?>">
                                 </div>
                                
 

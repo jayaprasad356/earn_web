@@ -24,8 +24,15 @@ if (empty($_POST['mobile'])) {
     print_r(json_encode($response));
     return false;
 }
+if (empty($_POST['upi'])) {
+    $response['success'] = false;
+    $response['message'] = "Upi is Empty";
+    print_r(json_encode($response));
+    return false;
+}
 $name = $db->escapeString($_POST['name']);
 $mobile = $db->escapeString($_POST['mobile']);
+$upi = $db->escapeString($_POST['upi']);
 $referral = (isset($_POST['referral']) && $_POST['referral'] != "") ? $db->escapeString($_POST['referral']) : "";
 $sql = "SELECT * FROM users WHERE mobile ='$mobile'";
 $db->sql($sql);
@@ -73,7 +80,7 @@ else{
 
 
 
-    $sql = "INSERT INTO users(`name`,`mobile`,`referral`,`my_refer_code`,`level1_referral_id`,`level2_referral_id`,`level3_referral_id`)VALUES('$name','$mobile','$referral','$myrefercode',$level1_referral_id,$level2_referral_id,$level3_referral_id)";
+    $sql = "INSERT INTO users(`name`,`mobile`,`upi`,`referral`,`my_refer_code`,`level1_referral_id`,`level2_referral_id`,`level3_referral_id`)VALUES('$name','$mobile','$upi','$referral','$myrefercode',$level1_referral_id,$level2_referral_id,$level3_referral_id)";
     $db->sql($sql);
     $res = $db->getResult();
     $sql = "SELECT * FROM users WHERE mobile ='$mobile'";
@@ -85,6 +92,7 @@ else{
         $temp['name'] = $row['name'];
         $temp['mobile'] = $row['mobile'];
         $temp['referral'] = $row['referral'];
+        $temp['upi'] = $row['upi'];
         $temp['my_refer_code'] = $row['my_refer_code'];
         $balance = $row['balance'];
         if($balance == NULL){
