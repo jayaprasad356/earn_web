@@ -46,32 +46,34 @@ include "header.php";
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-aqua">
                         <div class="inner">
-                            <h3>8</h3>
+                            <h3><?php
+                            $sql = "SELECT * FROM plans";
+                            $db->sql($sql);
+                            $res = $db->getResult();
+                            $num = $db->numRows($res);
+                            echo $num;
+                             ?></h3>
                             <p>Total Plans</p>
                             
                         </div>
-                        <div class="icon"><i class="fa fa-shopping-cart"></i></div>
+                        <div class="icon"></div>
                         <a href="plans.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-yellow">
                         <div class="inner">
-                            <h3>1000</h3>
+                        <h3><?php
+                            $sql = "SELECT * FROM users";
+                            $db->sql($sql);
+                            $res = $db->getResult();
+                            $num = $db->numRows($res);
+                            echo $num;
+                             ?></h3>
                             <p>Total Users</p>
                         </div>
-                        <div class="icon"><i class="fa fa-users"></i></div>
+                        <div class="icon"></div>
                         <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xs-6">
-                    <div class="small-box bg-red">
-                        <div class="inner">
-                            <h3>50000</h3>
-                            <p>Total Income</p>
-                        </div>
-                        <div class="icon"><i class="fa fa-money"></i></div>
-                        <a href="plans.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
