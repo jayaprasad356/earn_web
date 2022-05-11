@@ -53,7 +53,9 @@ $enddate = date('Y-m-d', strtotime($startdate. ' + '. $valid .' days'));
 $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
 $db->sql($sql);
 $res = $db->getResult();
-$balance = $res[0]['balance'];
+$num = $db->numRows($res);
+if($num == 1){
+    $balance = $res[0]['balance'];
 
 if($balance >= $price){
     $balance = $balance - $price;
@@ -78,6 +80,9 @@ if($balance >= $price){
     $response['success'] = false;
     $response['message'] = "InSufficient Balance";
     print_r(json_encode($response));
+
+}
+
 
 }
 
