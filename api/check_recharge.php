@@ -33,7 +33,7 @@ if($amount <= $minirech){
 }
 else{
     $response['success'] = false;
-    $response['message'] = "Mnimium Rexcharge amount Rs. ". $minirech;
+    $response['message'] = "Mnimium Recharge amount Rs. ". $minirech;
 
 }
 

@@ -35,13 +35,14 @@ $type = $db->escapeString($_POST['type']);
 $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
 $db->sql($sql);
 $res = $db->getResult();
-$level1_referral_id = $res[0]['level1_referral_id'];
-$level2_referral_id = $res[0]['level2_referral_id'];
-$level3_referral_id = $res[0]['level3_referral_id'];
-$recharge = $res[0]['balance'];
-$recharge = $recharge + $amount;
+
 $num = $db->numRows($res);
 if ($num == 1) {
+    $level1_referral_id = $res[0]['level1_referral_id'];
+    $level2_referral_id = $res[0]['level2_referral_id'];
+    $level3_referral_id = $res[0]['level3_referral_id'];
+    $recharge = $res[0]['balance'];
+    $recharge = $recharge + $amount;
     $sql = "SELECT * FROM earn_settings WHERE title = 'earn_settings'";
     $db->sql($sql);
     $res = $db->getResult();

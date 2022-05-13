@@ -24,12 +24,15 @@ if (isset($_POST['btnUpdate'])) {
         $minimum_setting = (isset($_POST['minimum_setting'])) ? $db->escapeString($fn->xss_clean($_POST['minimum_setting'])) : "";
         $recharge_setting = (isset($_POST['recharge_setting'])) ? $db->escapeString($fn->xss_clean($_POST['recharge_setting'])) : "";
         $service_link = (isset($_POST['service_link'])) ? $db->escapeString($fn->xss_clean($_POST['service_link'])) : "";
+        $razorpay_payment_method = (isset($_POST['razorpay_payment_method'])) ? $db->escapeString($fn->xss_clean($_POST['razorpay_payment_method'])) : "";
+        $razorpay_key = (isset($_POST['razorpay_key'])) ? $db->escapeString($fn->xss_clean($_POST['razorpay_key'])) : "";
+        $razorpay_secret_key = (isset($_POST['razorpay_secret_key'])) ? $db->escapeString($fn->xss_clean($_POST['razorpay_secret_key'])) : "";
         
     
        
         
       
-            $sql = "UPDATE earn_settings SET account_number='$account_number',ifsc_code='$ifsc_code',bank_name='$bank_name',name='$name',upi_id='$upi_id',minimum_setting='$minimum_setting',recharge_setting='$recharge_setting',service_link='$service_link' WHERE title='earn_settings'";
+            $sql = "UPDATE earn_settings SET account_number='$account_number',ifsc_code='$ifsc_code',bank_name='$bank_name',name='$name',upi_id='$upi_id',minimum_setting='$minimum_setting',recharge_setting='$recharge_setting',service_link='$service_link',razorpay_payment_method='$razorpay_payment_method',razorpay_key='$razorpay_key',razorpay_secret_key='$razorpay_secret_key' WHERE title='earn_settings'";
             $db->sql($sql);
             $earnsettings_result = $db->getResult();
             if (!empty($earnsettings_result)) {
@@ -129,15 +132,31 @@ foreach ($res as $row)
                             <div class="form-group">
                                <div class='col-md-4'>
                                     <label for="exampleInputEmail1">Minimum Recharge Setting</label> <?php echo isset($error['recharge_setting']) ? $error['recharge_setting'] : ''; ?>
-                                    <input type="text" class="form-control" name="recharge_setting">
+                                    <input type="text" class="form-control" name="recharge_setting" value="<?php echo $data['recharge_setting']?>">
                                 </div>
                                 <div class='col-md-4'>
                                     <label for="exampleInputEmail1">Customer Service Link</label> <?php echo isset($error['service_link']) ? $error['service_link'] : ''; ?>
-                                    <input type="text" class="form-control" name="service_link" >
+                                    <input type="text" class="form-control" name="service_link" value="<?php echo $data['service_link']?>" >
                                 </div>
 
                             </div>
                         </div>
+                        <h5>Razorpay Payments </h5>
+                        <hr>
+                        <div class="form-group">
+                            <label for="razorpay_payment_method">Razorpay Payments <small>[ Enable / Disable ] </small></label><br>
+                            <input type="checkbox" id="razorpay_payment_method_btn" class="js-switch" <?= (isset($data['razorpay_payment_method']) && !empty($data['razorpay_payment_method']) && $data['razorpay_payment_method'] == '1') ? 'checked' : ""; ?>>
+                            <input type="hidden" id="razorpay_payment_method" name="razorpay_payment_method" value="<?= (isset($data['razorpay_payment_method']) && !empty($data['razorpay_payment_method'])) ? $data['razorpay_payment_method'] : 0; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="razorpay_key">Razorpay key ID</label>
+                            <input type="text" class="form-control" name="razorpay_key" value="<?= (isset($data['razorpay_key'])) ? $data['razorpay_key'] : '' ?>" placeholder="Razor Key ID" />
+                        </div>
+                        <div class="form-group">
+                            <label for="razorpay_secret_key">Secret Key</label>
+                            <input type="text" class="form-control" name="razorpay_secret_key" value="<?= (isset($data['razorpay_secret_key'])) ? $data['razorpay_secret_key'] : '' ?>" placeholder="Razorpay Secret Key " />
+                        </div>
+
                     <!-- /.box-body -->
                     <div class="box-footer">
                         <input type="submit" class="btn-primary btn" value="Update" name="btnUpdate" />&nbsp;
@@ -159,4 +178,14 @@ foreach ($res as $row)
             CKEDITOR.instances[instance].setData('');
         }
     });
+    var changeCheckbox = document.querySelector('#razorpay_payment_method_btn');
+    var init = new Switchery(changeCheckbox);
+    changeCheckbox.onchange = function() {
+        if ($(this).is(':checked')) {
+            $('#razorpay_payment_method').val(1);
+        } else {
+            $('#razorpay_payment_method').val(0);
+        }
+    };
+
 </script>
