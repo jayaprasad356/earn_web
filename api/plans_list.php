@@ -9,6 +9,7 @@ header("Pragma: no-cache");
 
 include_once('../includes/crud.php');
 include_once('verify-token.php');
+include_once('../includes/variables.php');
 if (!verify_token()) {
     return false;
 }
