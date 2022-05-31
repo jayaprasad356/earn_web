@@ -94,16 +94,21 @@ $amount = $res[0]['amount'];
 
     function payAmount(amount,upi,id){
         $.ajax({
-                url: 'api/enalo.php',
+                url: 'api/paywithdrawal.php',
                 type: 'post',
                 data: {
                     amt: amount , upi : upi , id: id ,
                 }, 
                 success: function (data) {
                     var data = JSON.parse(data);
-                    if(data.status == 'success'){
+                    
+                    if(data.status == 'SUCCESS'){
                         alert("Amount Paid Successfully");
                         location.reload(true);
+
+                    }
+                    else{
+                        alert(data.message);
 
                     }
                 },

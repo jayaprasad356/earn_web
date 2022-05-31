@@ -1,4 +1,4 @@
-<?php session_start();
+  <?php session_start();
     ob_start(); 
     include_once('includes/crud.php');
     $db = new Database;
@@ -54,7 +54,7 @@
     <![endif]-->
   </head>
 </body>
-      <!-- Content Wrapper. Contains page content -->
+      <!-- Content Wrapper. Contains page content -->re6
        <?php include 'public/login-form.php'; ?>
   </body>
 </html>
