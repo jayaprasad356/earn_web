@@ -45,6 +45,7 @@ if ($num >= 1) {
         $temp['level1_referral_id'] = $row['level1_referral_id'];
         $temp['level2_referral_id'] = $row['level2_referral_id'];
         $temp['level3_referral_id'] = $row['level3_referral_id'];
+        $temp['status'] = $row['status'];
         $rows[] = $temp;
     }
     $response['success'] = true;
