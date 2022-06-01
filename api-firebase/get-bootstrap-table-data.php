@@ -95,7 +95,7 @@ print_r(json_encode($bulkData));
 if (isset($_GET['table']) && $_GET['table'] == 'withdrawals') {
     $where = '';
     
-    $sql = "SELECT *,withdrawals.id AS id FROM withdrawals,users WHERE withdrawals.user_id = users.id ORDER BY status";
+    $sql = "SELECT *,withdrawals.id AS id,withdrawals.status AS status FROM withdrawals,users WHERE withdrawals.user_id=users.id ORDER BY withdrawals.status DESC";
     $db->sql($sql);
     $res = $db->getResult();
     $rows = array();
