@@ -10,7 +10,7 @@ $db = new Database();
 $db->connect();
 // session_start();
 $withdrawals_id = $_GET['id'];
-$sql = "SELECT *,withdrawals.id AS id FROM withdrawals,users WHERE withdrawals.user_id = users.id AND withdrawals.id = '$withdrawals_id'";
+$sql = "SELECT *,withdrawals.id AS id,withdrawals.status AS status FROM withdrawals,users WHERE withdrawals.user_id = users.id AND withdrawals.id = '$withdrawals_id'";
 $db->sql($sql);
 $res = $db->getResult();
 if($res[0]['status'] == '0'){
