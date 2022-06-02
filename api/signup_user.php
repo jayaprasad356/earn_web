@@ -80,7 +80,7 @@ else{
 
 
 
-    $sql = "INSERT INTO users(`name`,`mobile`,`upi`,`referral`,`my_refer_code`,`level1_referral_id`,`level2_referral_id`,`level3_referral_id`,`status`)VALUES('$name','$mobile','$upi','$referral','$myrefercode',$level1_referral_id,$level2_referral_id,$level3_referral_id,1)";
+    $sql = "INSERT INTO users(`name`,`mobile`,`upi`,`referral`,`my_refer_code`,`level1_referral_id`,`level2_referral_id`,`level3_referral_id`,`earn`,`status`)VALUES('$name','$mobile','$upi','$referral','$myrefercode',$level1_referral_id,$level2_referral_id,$level3_referral_id,0,1)";
     $db->sql($sql);
     $res = $db->getResult();
     $sql = "SELECT * FROM users WHERE mobile ='$mobile'";
