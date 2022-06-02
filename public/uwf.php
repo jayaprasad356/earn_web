@@ -10,6 +10,13 @@ $db = new Database();
 $db->connect();
 // session_start();
 $withdrawals_id = $_GET['id'];
+if (isset($_POST['btnUpdate'])) {
+    $payment_status = $db->escapeString($_POST['payment_status']);
+    $sql = "UPDATE withdrawals SET payment_status='$payment_status'WHERE id=$withdrawals_id";
+    $db->sql($sql);
+    $error['add_menu'] = " <span class='label label-success'>Updated</span>";
+
+}
 $sql = "SELECT *,withdrawals.id AS id,withdrawals.status AS status FROM withdrawals,users WHERE withdrawals.user_id = users.id AND withdrawals.id = '$withdrawals_id'";
 $db->sql($sql);
 $res = $db->getResult();
@@ -21,6 +28,7 @@ else if($res[0]['status'] == '1'){
 }
 $upi = $res[0]['upi'];
 $amount = $res[0]['amount'];
+
 ?>
 <section class="content-header">
     <h1>View Withdrawal</h1>
@@ -70,7 +78,24 @@ $amount = $res[0]['amount'];
                             </tr>
 
                         </table>
+                        <form method="post" enctype="multipart/form-data">
+                        <div class='col-md-8'>
+                                    <select id="payment_status" name="payment_status" class="form-control">
+                                        <option value="">Select</option>
+                                        <option value="Success"<?=$res[0]['payment_status'] == 'Success' ? ' selected="selected"' : '';?>>Success</option>
+                                        <option value="Fail"<?=$res[0]['payment_status'] == 'Fail' ? ' selected="selected"' : '';?> >Fail</option>
+                                        <option value="Refund" <?=$res[0]['payment_status'] == 'Refund' ? ' selected="selected"' : '';?>>Refund</option>
+                                        <option value="Process" <?=$res[0]['payment_status'] == 'Process' ? ' selected="selected"' : '';?>>Process</option>
+                
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                <input type="submit" class="btn btn-primary" value="Update" name="btnUpdate">
+                          
+                                </div>
+                        </form>
                     </div><!-- /.box-body -->
+
                     <?php
                     if($res[0]['status'] != '1'){?>
                         <div class="box-footer clearfix">
@@ -82,6 +107,7 @@ $amount = $res[0]['amount'];
 
                     }
                      ?>
+                    </div>
 
                 </div><!-- /.box -->
             </div></section>
