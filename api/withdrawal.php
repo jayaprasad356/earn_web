@@ -35,7 +35,7 @@ if ($num == 1) {
     $db->sql($sql);
     $res = $db->getResult();
     $miniwith = $res[0]['minimum_setting'];
-    if($amount <= $miniwith){
+    if($amount >= $miniwith){
         if($amount <= $earn){
             $sql = "INSERT INTO withdrawals (`user_id`,`amount`,`status`) VALUES ('$user_id','$amount',0)";
             $db->sql($sql);
