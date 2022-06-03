@@ -69,8 +69,8 @@ $amount = $res[0]['amount'];
                                 <td><?php echo $res[0]['amount']; ?></td>
                             </tr>
                             <tr>
-                                <th style="width: 200px">Status</th>
-                                <td><?php echo $status; ?></td>
+                                <th style="width: 200px">Payment Status</th>
+                                <td><?php echo $res[0]['payment_status']; ?></td>
                             </tr>
                             <tr>
                                 <th style="width: 200px">Date</th>
@@ -78,6 +78,7 @@ $amount = $res[0]['amount'];
                             </tr>
 
                         </table>
+                        <?php if($res[0]['payment_status'] != 'Success'){ ?>
                         <form method="post" enctype="multipart/form-data">
                         <div class='col-md-8'>
                                     <select id="payment_status" name="payment_status" class="form-control">
@@ -94,10 +95,11 @@ $amount = $res[0]['amount'];
                           
                                 </div>
                         </form>
+                        <?php } ?>
                     </div><!-- /.box-body -->
 
                     <?php
-                    if($res[0]['status'] != '1'){?>
+                    if($res[0]['payment_status'] != 'Success'){?>
                         <div class="box-footer clearfix">
                         <input type="submit" class="btn btn-primary" value="Pay Now" name="submit" onclick="payAmount(<?= $amount ?>,'<?= $upi ?>','<?= $res[0]['id'] ?>')">
                             

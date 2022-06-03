@@ -108,15 +108,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawals') {
         $tempRow['name'] = $row['name'];
         $tempRow['mobile'] = $row['mobile'];
         $tempRow['amount'] = $row['amount'];
-        $status = $row['status'];
-        if($status == '0'){
-            $status = 'Pending';
-        }
-        else{
-            $status = 'Completed';
-
-        }
-        $tempRow['status'] = $status;
+        $tempRow['payment_status'] = $row['payment_status'];
         $tempRow['date_created'] = $row['date_created'];
         $tempRow['operate'] = $operate;
         $rows[] = $tempRow;

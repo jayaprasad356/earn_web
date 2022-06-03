@@ -25,7 +25,7 @@
                                     <th data-field="name" data-sortable="true">Name</th>
                                     <th data-field="mobile" data-sortable="true">Mobile</th>
                                     <th data-field="amount" data-sortable="true">Amount</th>
-                                    <th data-field="status" data-sortable="true" >Status</th>
+                                    <th data-field="payment_status" data-sortable="true" >Payment Status</th>
                                     <th data-field="date_created" data-sortable="true" >Date Created</th>
                                     <th data-field="operate" data-events="actionEvents">Action</th>
                                 </tr>
