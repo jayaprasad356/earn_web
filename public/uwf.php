@@ -12,11 +12,29 @@ $db->connect();
 $withdrawals_id = $_GET['id'];
 if (isset($_POST['btnUpdate'])) {
     $payment_status = $db->escapeString($_POST['payment_status']);
+    if ($payment_status == 'Success') {
+        $sql = "UPDATE `withdrawals` SET `txn_id`='',`payment_status`= 'Success' WHERE id=" . $withdrawals_id;
+        $db->sql($sql);
+        $sql = "SELECT * FROM withdrawals WHERE id = '" . $withdrawals_id . "'";
+        $db->sql($sql);
+        $resw = $db->getResult();
+        $amount = $resw[0]['amount'];
+        $user_id = $resw[0]['user_id'];
+        $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
+        $db->sql($sql);
+        $resw = $db->getResult();
+        $earn = $resw[0]['earn'];
+        $newearn = $earn - $amount;
+        $sql = "UPDATE users SET `earn`= $newearn WHERE `id`=" . $user_id;
+        $db->sql($sql);
+        
+    } 
     $sql = "UPDATE withdrawals SET payment_status='$payment_status'WHERE id=$withdrawals_id";
     $db->sql($sql);
     $error['add_menu'] = " <span class='label label-success'>Updated</span>";
 
 }
+
 $sql = "SELECT *,withdrawals.id AS id,withdrawals.status AS status FROM withdrawals,users WHERE withdrawals.user_id = users.id AND withdrawals.id = '$withdrawals_id'";
 $db->sql($sql);
 $res = $db->getResult();
@@ -141,7 +159,7 @@ $amount = $res[0]['amount'];
                     }
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                    alert("Failed ");
+                    alert("Payment Done ");
                 }
             });
        

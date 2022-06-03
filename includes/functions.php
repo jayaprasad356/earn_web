@@ -293,6 +293,7 @@ class functions
         } */
         $res = $this->db->getResult();
         $tokens = array();
+        //print_r($res);
         foreach ($res as $row) {
             array_push($tokens, $row['fcm_id']);
         }

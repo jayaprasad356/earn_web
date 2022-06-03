@@ -180,19 +180,7 @@ function directTransfer($token){
         $response = post_helper('directTransfer', $dtransfer, $token);
         if($response['status'] == 'SUCCESS'){
 
-            $sql = "UPDATE `withdrawals` SET `txn_id`='$transferId',`payment_status`= 'Success' WHERE id=" . $id;
-            $db->sql($sql);
-            $sql = "SELECT * FROM withdrawals WHERE id = '" . $id . "'";
-            $db->sql($sql);
-            $res = $db->getResult();
-            $user_id = $res[0]['user_id'];
-            $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
-            $db->sql($sql);
-            $res = $db->getResult();
-            $earn = $res[0]['earn'];
-            $newearn = $earn - $amt;
-            $sql = "UPDATE users SET `earn`= $newearn WHERE `id`=" . $user_id;
-            $db->sql($sql);
+
             echo json_encode($response);
             
 

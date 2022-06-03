@@ -14,9 +14,7 @@ $pincode_ids_exc = "";
 $db->sql($sql_query);
 
 $res_cur = $db->getResult();
-$department = $_SESSION['department'];
-$batch = $_SESSION['batch'];
-if (isset($_POST['btnAdd'])) {
+if (isset($_POST['btnsAdd'])) {
         $error = array();
         $title = $db->escapeString($fn->xss_clean($_POST['title']));
         $description = $db->escapeString($fn->xss_clean($_POST['description']));
@@ -31,8 +29,7 @@ if (isset($_POST['btnAdd'])) {
 
         if (!empty($title) && !empty($description))
         {
-            $sql = "INSERT INTO notifications (title,description) VALUES('$title','$description')";
-            $db->sql($sql);
+            
             $notification_result = $db->getResult();
             if (!empty($notification_result)) {
                 $notification_result = 0;
@@ -73,7 +70,7 @@ if (isset($_POST['btnAdd'])) {
 
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form id='add_subject_form' method="post" enctype="multipart/form-data">
+                <form id='notification_form' method="post" action="send-multiple-push.php" enctype="multipart/form-data">
                     <div class="box-body">
                         <div class="row">
                             <div class="form-group">
@@ -104,6 +101,7 @@ if (isset($_POST['btnAdd'])) {
                         <!--<div  id="res"></div>-->
                     </div>
                 </form>
+                <div id="result"></div>
             </div>
             <!-- /.box -->
         </div>
@@ -123,4 +121,27 @@ if (isset($_POST['btnAdd'])) {
         placeholder: 'Type in batch to search',
 
     });
+    $('#notification_form').on('submit', function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: formData,
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(result) {
+
+                    $('#result').html(result.message);
+                    $('#result').show().delay(6000).fadeOut();
+                    $('#notification_form').each(function() {
+                        this.reset();
+                    });
+                    
+                }
+            });
+
+        });
 </script>
