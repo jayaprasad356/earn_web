@@ -38,7 +38,7 @@ if ($num == 1) {
     $miniwith = $res[0]['minimum_setting'];
     if($amount >= $miniwith){
         if($amount <= $earn){
-            $sql = "INSERT INTO withdrawals (`user_id`,`amount`,`payment_status`,`date_created`) VALUES ('$user_id','$amount','Process',NOW())";
+            $sql = "INSERT INTO withdrawals (`user_id`,`amount`,`payment_status`,`date_created`) VALUES ('$user_id','$amount','Process',Date('Y-m-d H:i:s'))";
             $db->sql($sql);
             $res = $db->getResult();
             
