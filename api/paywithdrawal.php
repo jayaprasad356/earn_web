@@ -121,7 +121,7 @@ function get_helper($finalUrl, $token){
     curl_close($ch);
 
     $rObj = json_decode($r, true);    
-    if($rObj['status'] != 'SUCCESS' || $rObj['subCode'] != '200') throw new Exception('incorrect response: '.$rObj['message']);
+    //if($rObj['status'] != 'SUCCESS' || $rObj['subCode'] != '200') throw new Exception('incorrect response: '.$rObj['message']);
     return $rObj;
 }
 
