@@ -94,8 +94,11 @@ print_r(json_encode($bulkData));
 }
 if (isset($_GET['table']) && $_GET['table'] == 'withdrawals') {
     $where = '';
-    
-    $sql = "SELECT *,withdrawals.id AS id,withdrawals.status AS status FROM withdrawals,users WHERE withdrawals.user_id=users.id ORDER BY withdrawals.status DESC";
+    if (isset($_GET['payment_status']) && $_GET['payment_status'] != '') {
+        $payment_status = $db->escapeString($_GET['payment_status']);
+        $where .= " AND withdrawals.payment_status = '$payment_status' ";
+    }
+    $sql = "SELECT *,withdrawals.id AS id,withdrawals.payment_status AS status FROM withdrawals,users WHERE withdrawals.user_id=users.id $where ORDER BY withdrawals.payment_status DESC";
     $db->sql($sql);
     $res = $db->getResult();
     $rows = array();
