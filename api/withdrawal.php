@@ -54,8 +54,12 @@ if ($num == 1) {
             $sql = "UPDATE users SET `earn`= $newearn WHERE `id`=" . $user_id;
             $db->sql($sql);
             $res = $db->getResult();
+            $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
+            $db->sql($sql);
+            $res = $db->getResult();
             $response['success'] = true;
             $response['message'] = "Amount Withdrawal Requested Successfully";
+            $response['data'] = $res;
     
         }
         else{
