@@ -28,10 +28,10 @@ $amount = $db->escapeString($_POST['amount']);
 $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
 $db->sql($sql);
 $res = $db->getResult();
-$earn = $res[0]['earn'];
-$newearn = $earn - $amount;
 $num = $db->numRows($res);
 if ($num == 1) {
+    $earn = $res[0]['earn'];
+    $newearn = $earn - $amount;
     $sql = "SELECT * FROM earn_settings WHERE title = 'earn_settings'";
     $db->sql($sql);
     $res = $db->getResult();
@@ -43,9 +43,10 @@ if ($num == 1) {
             $db->sql($sql);
             $res = $db->getResult();
             
-            // $sql = "UPDATE users SET `earn`= $newearn WHERE `id`=" . $user_id;
-            // $db->sql($sql);
-            // $res = $db->getResult();
+            
+            $sql = "UPDATE users SET `earn`= $newearn WHERE `id`=" . $user_id;
+            $db->sql($sql);
+            $res = $db->getResult();
             $response['success'] = true;
             $response['message'] = "Amount Withdrawal Requested Successfully";
     

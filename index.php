@@ -54,7 +54,7 @@
     <![endif]-->
   </head>
 </body>
-      <!-- Content Wrapper. Contains page content -->re6
+      <!-- Content Wrapper. Contains page content -->
        <?php include 'public/login-form.php'; ?>
   </body>
 </html>
