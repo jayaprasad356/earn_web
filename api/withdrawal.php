@@ -23,15 +23,22 @@ if (empty($_POST['amount'])) {
     print_r(json_encode($response));
     return false;
 }
+if (empty($_POST['act_amount'])) {
+    $response['success'] = false;
+    $response['message'] = "Actual Amount is Empty";
+    print_r(json_encode($response));
+    return false;
+}
 $user_id = $db->escapeString($_POST['user_id']);
 $amount = $db->escapeString($_POST['amount']);
+$act_amount = $db->escapeString($_POST['act_amount']);
 $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num == 1) {
     $earn = $res[0]['earn'];
-    $newearn = $earn - $amount;
+    $newearn = $earn - $act_amount;
     $sql = "SELECT * FROM earn_settings WHERE title = 'earn_settings'";
     $db->sql($sql);
     $res = $db->getResult();
