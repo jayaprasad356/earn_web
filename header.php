@@ -213,13 +213,6 @@ $res_logo = $db->getResult();
                         <li><a href="notifications.php"><i class="fa fa-sliders"></i> Manage Notifications</a></li>
                     </ul>
                 </li>
-                <!-- <li class="treeview">
-                    <a href="payment-methods-settings.php">
-                        <i class="fa fa-bullseye"></i>
-                        <span>Pay U Money</span>
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </a>
-                </li> -->
                 
             </ul>
             </section>

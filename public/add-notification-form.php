@@ -14,39 +14,6 @@ $pincode_ids_exc = "";
 $db->sql($sql_query);
 
 $res_cur = $db->getResult();
-if (isset($_POST['btnsAdd'])) {
-        $error = array();
-        $title = $db->escapeString($fn->xss_clean($_POST['title']));
-        $description = $db->escapeString($fn->xss_clean($_POST['description']));
-        
-       
-        if (empty($title)) {
-            $error['title'] = " <span class='label label-danger'>Required!</span>";
-        }
-        if (empty($description)) {
-            $error['description'] = " <span class='label label-danger'>Required!</span>";
-        }
-
-        if (!empty($title) && !empty($description))
-        {
-            
-            $notification_result = $db->getResult();
-            if (!empty($notification_result)) {
-                $notification_result = 0;
-            } else {
-                $notification_result = 1;
-            }
-            if ($notification_result == 1) {
-                $error['add_menu'] = "<section class='content-header'>
-                                                <span class='label label-success'>Notification Added Successfully</span>
-                                                <h4><small><a  href='notifications.php'><i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Notifications</a></small></h4>
-                                                 </section>";
-            } else {
-                $error['add_menu'] = " <span class='label label-danger'>Failed</span>";
-            }
-
-        }
-    }
 ?>
 <section class="content-header">
     <h1>Send Notification</h1>
