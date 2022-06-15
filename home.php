@@ -112,7 +112,7 @@ include "header.php";
                     <div class="small-box bg-green">
                         <div class="inner">
                         <h3><?php
-                            $sql = "SELECT SUM(amount) AS total FROM withdrawals WHERE status = '1'";
+                            $sql = "SELECT SUM(amount) AS total FROM withdrawals WHERE payment_status = 'Success'";
                             $db->sql($sql);
                             $res = $db->getResult();
                             $num = $res[0]['total'];
@@ -122,22 +122,6 @@ include "header.php";
                         </div>
                         <div class="icon"></div>
                         <a href="withdrawals.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xs-6">
-                    <div class="small-box bg-blue">
-                        <div class="inner">
-                        <h3><?php
-                            $sql = "SELECT SUM(price) AS total FROM plans";
-                            $db->sql($sql);
-                            $res = $db->getResult();
-                            $num = $res[0]['total'];
-                            echo 'Rs. '.$num;
-                             ?></h3>
-                            <p>Total Investments</p>
-                        </div>
-                        <div class="icon"></div>
-                        <a href="plans.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
