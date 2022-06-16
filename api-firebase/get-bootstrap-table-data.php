@@ -82,6 +82,8 @@ if (isset($_GET['table']) && $_GET['table'] == 'users') {
     $sql = "SELECT * FROM users ". $where ." ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . "," . $limit;
     $db->sql($sql);
     $res = $db->getResult();
+    $bulkData = array();
+    $bulkData['total'] = $total;
     $rows = array();
     $tempRow = array();
     foreach ($res as $row) {
