@@ -19,7 +19,7 @@ class Database
      */
 
     private $db_host = "localhost";  // Change as required
-    private $db_user = "u743445510_earnapp";  // Change as required
+    private $db_user = "u743445510_earnuser";  // Change as required
     private $db_pass = "Earn@2022";  // Change as required
     private $db_name = "u743445510_earnapp";    // Change as required
 
